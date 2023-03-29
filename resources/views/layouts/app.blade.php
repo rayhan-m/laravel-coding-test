@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 </head>
 {{--<body id="page-top">--}}
 
@@ -156,9 +157,12 @@
 
 <!-- Scripts -->
 <script src="{{ asset('/js/jquery.min.js') }}"></script>
+
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script>Dropzone.autoDiscover = false;</script>
+<script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 @stack('page_js')
 </body>
 </html>

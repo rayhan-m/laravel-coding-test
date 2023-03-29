@@ -5,6 +5,7 @@
         <h1 class="h3 mb-0 text-gray-800">Create Product</h1>
     </div>
     <form action="{{ route('product.store') }}" method="post" autocomplete="off" spellcheck="false">
+        @csrf
         <section>
             <div class="row">
                 <div class="col-md-6">
@@ -15,35 +16,36 @@
                         </div>
                         <div class="card-body border">
                             <div class="form-group">
-                                <label for="product_name">Product Name</label>
-                                <input type="text"
-                                       name="product_name"
-                                       id="product_name"
-                                       required
-                                       placeholder="Product Name"
-                                       class="form-control">
+                                <label for="product_name">Product Name <span class="text-danger">*</span> </label>
+                                <input type="text" name="product_name" id="product_name" value="{{ old('product_name') }}"
+                                    placeholder="Product Name" class="form-control">
+                                @error('product_name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="product_sku">Product SKU</label>
-                                <input type="text" name="product_sku"
-                                       id="product_sku"
-                                       required
-                                       placeholder="Product Name"
-                                       class="form-control"></div>
+                                <label for="product_sku">Product SKU <span class="text-danger">*</span> </label>
+                                <input type="text" name="product_sku" id="product_sku" value="{{ old('product_sku') }}"
+                                    placeholder="Product Name" class="form-control">
+                                @error('product_sku')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <div class="form-group mb-0">
-                                <label for="product_description">Description</label>
-                                <textarea name="product_description"
-                                          id="product_description"
-                                          required
-                                          rows="4"
-                                          class="form-control"></textarea>
+                                <label for="product_description">Description <span class="text-danger">*</span> </label>
+                                <textarea name="product_description" id="product_description" rows="4" class="form-control"> {{ old('product_description') }} </textarea>
+                                @error('product_description')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <!--                    Media-->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between"><h6
-                                class="m-0 font-weight-bold text-primary">Media</h6></div>
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Media</h6>
+                        </div>
                         <div class="card-body border">
                             <div id="file-upload" class="dropzone dz-clickable">
                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
@@ -54,8 +56,8 @@
                 <!--                Variants-->
                 <div class="col-md-6">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3"><h6
-                                class="m-0 font-weight-bold text-primary">Variants</h6>
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Variants</h6>
                         </div>
                         <div class="card-body pb-0" id="variant-sections">
                         </div>
@@ -73,11 +75,11 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                    <tr class="text-center">
-                                        <th width="33%">Variant</th>
-                                        <th>Price</th>
-                                        <th>Stock</th>
-                                    </tr>
+                                        <tr class="text-center">
+                                            <th width="33%">Variant</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                        </tr>
                                     </thead>
                                     <tbody id="variant-previews">
                                     </tbody>
@@ -87,7 +89,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-lg btn-primary">Save</button>
+            <button type="submit" class="btn btn-lg btn-primary">Save</button>
             <button type="button" class="btn btn-secondary btn-lg">Cancel</button>
         </section>
     </form>
