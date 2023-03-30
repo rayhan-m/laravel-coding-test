@@ -4,12 +4,29 @@ var indexs = [];
 
 $(document).ready(function () {
     addVariantTemplate();
+    
     $("#file-upload").dropzone({
-        url: "{{ route('file-upload') }}",
+        url: "/dropzone",
         method: "post",
         addRemoveLinks: true,
+        maxFiles: 1,
+        init: function() {
+            this.on("maxfilesexceeded", function(file){
+                alert("No more files please!");
+            });
+        },
+        maxfilesexceeded: function(file) {
+            this.removeAllFiles();
+            this.addFile(file);
+        },
+        // csrf 
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+
         success: function (file, response) {
-            //
+            $('#ProductImage').append('<input type="hidden" name="product_image" value="' + file.dataURL + '">');
+            // $('#ProductImage').append('<input type="hidden" name="product_image[]" value="' + file.dataURL[file.id] + '">')
         },
         error: function (file, response) {
             //
@@ -143,4 +160,5 @@ function removeVariant(event, element) {
 
     updateVariantPreview();
 }
+
 

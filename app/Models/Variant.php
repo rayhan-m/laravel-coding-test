@@ -10,4 +10,14 @@ class Variant extends Model
         'title', 'description'
     ];
 
+    // productvariants
+    public function productvariants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+    public function productVariantGroupBy()
+    {
+        return $this->hasMany(ProductVariant::class)->select('variant')->groupBy('variant');
+    }
+
 }

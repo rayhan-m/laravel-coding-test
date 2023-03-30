@@ -10,11 +10,14 @@
         <form action="" method="get" class="card-header">
             <div class="form-row justify-content-between">
                 <div class="col-md-2">
-                    <input type="text" name="title" placeholder="Product Title" class="form-control">
+                    <input type="text" name="title" placeholder="Product Title" value="{{@$search['title']}}" class="form-control">
                 </div>
                 <div class="col-md-2">
-                    <select name="variant" id="" class="form-control">
-
+                    <select name="variant" class="form-control">
+                        <option value="">--Select A Variant--</option>
+                            @foreach ($variants as $item)
+                                <option value="{{@$item->variant}}"  {{@$search['variant'] == @$item->variant?"selected":""}} >{{@$item->variant}}</option>
+                            @endforeach
                     </select>
                 </div>
 
@@ -23,13 +26,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Price Range</span>
                         </div>
-                        <input type="text" name="price_from" aria-label="First name" placeholder="From"
+                        <input type="text" name="price_from" aria-label="First name" value="{{@$search['price_from']}}" placeholder="From"
                             class="form-control">
-                        <input type="text" name="price_to" aria-label="Last name" placeholder="To" class="form-control">
+                        <input type="text" name="price_to" aria-label="Last name" value="{{@$search['price_to']}}" placeholder="To" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <input type="date" name="date" placeholder="Date" class="form-control">
+                    <input type="date" name="date" placeholder="Date" value="{{@$search['date']}}" class="form-control">
                 </div>
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary float-right"><i class="fa fa-search"></i></button>
